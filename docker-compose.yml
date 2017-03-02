@@ -9,6 +9,8 @@ services:
    command: php-fpm --nodaemonize
    links:
      - redis
+   #ports:
+   #  - "9001:9001"
  nginx:
   build: ./docker_data/nginx
   container_name: nginx_c
