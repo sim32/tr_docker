@@ -6,6 +6,7 @@ services:
    volumes:
      - .:/app
    command: chown -R www-data:www-data /app
+   command: echo "192.168.9.11 mysql.app.dev" >> /etc/hosts
    command: php-fpm --nodaemonize
    links:
      - redis

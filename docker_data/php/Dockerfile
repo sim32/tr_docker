@@ -23,9 +23,13 @@ RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
 RUN php composer-setup.php
 RUN mv composer.phar /usr/local/bin/composer
 
+RUN apt-get install -y curl git nano mc
+
+RUN curl -sL https://deb.nodesource.com/setup_6.x | bash -
+RUN apt-get install -y nodejs
+
 WORKDIR /app
 
-RUN apt-get install -y git nano mc
 #RUN touch /usr/local/etc/php/conf.d/additional.ini
 #RUN chmod 777 /usr/local/etc/php/conf.d/additional.ini
 RUN echo "xdebug.remote_port=9001" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
@@ -34,6 +38,9 @@ RUN echo "xdebug.remote_enable=on" >> /usr/local/etc/php/conf.d/docker-php-ext-x
 RUN echo "xdebug.remote_autostart=on" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.remote_host=172.17.0.1" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 RUN echo "xdebug.remote_mode=req" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+
+RUN npm install
+RUN npm i -g grunt
 
 EXPOSE 9001
 #CMD ls /etc
