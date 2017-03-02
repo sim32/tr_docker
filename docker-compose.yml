@@ -4,15 +4,23 @@ services:
    container_name: php_c
    build: ./docker_data/php/
    volumes:
-     - ./app:/app
+     - .:/app
    command: chown -R www-data:www-data /app
    command: php-fpm --nodaemonize
+   links:
+     - redis
  nginx:
   build: ./docker_data/nginx
   container_name: nginx_c
   ports:
     - "80:80"
   volumes:
-    - ./app:/app
+    - .:/app
   links:
     - php
+    - redis
+ redis:
+   container_name: redis_c
+   build: ./docker_data/redis/
+   ports:
+     - "6379:6379"

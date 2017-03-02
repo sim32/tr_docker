@@ -1,0 +1,139 @@
+{
+    "name": "tr-project",
+    "license": "MIT",
+    "type": "project",
+    "description": "Приложение корпоративный сайт Tradedealer",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": { "": "src/" },
+        "classmap": [ "app/AppKernel.php", "app/AppCache.php" ]
+    },
+    "preferred-install": "source",
+    "require": {
+        "php": ">=5.6",
+
+        "tradeins/corp-bundle": "dev-master",
+        "tradeins/corp-theme": "dev-master",
+        "tradeins/tmp-bundle": "dev-master",
+        "tradeins/e-staff": "dev-master",
+        "tradeins/user-bundle": "dev-master",
+        "tradeins/config-bundle": "dev-master"
+    },
+    "require-dev": {
+        "symfony/phpunit-bridge": "~2.7"
+    },
+    "repositories": [
+        { "type": "git", "url": "ssh://git@gitlab.artsofte.ru:2243/tradeins/corp-bundle.git" },
+        { "type": "git", "url": "ssh://git@gitlab.artsofte.ru:2243/tradeins/corp-theme.git" },
+        { "type": "git", "url": "ssh://git@gitlab.artsofte.ru:2243/tradeins/tmp-bundle.git" },
+        { "type": "git", "url": "ssh://git@gitlab.artsofte.ru:2243/tradeins/e-staff.git" },
+        { "type": "git", "url": "ssh://git@gitlab.artsofte.ru:2243/tradeins/user-bundle.git" },
+        { "type": "git", "url": "ssh://git@gitlab.artsofte.ru:2243/tradeins/config-bundle.git" },
+        {
+            "type": "package",
+            "package": {
+                "name": "jonlil/ckfinder",
+                "version": "dev-master",
+                "source": {
+                    "url": "ssh://git@gitlab.artsofte.ru:2243/bundles/ckfinder.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "files": ["core/ckfinder_php5.php"]
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "jonlil/ckfinder-bundle",
+                "version": "dev-master",
+                "source": {
+                    "url": "ssh://git@gitlab.artsofte.ru:2243/bundles/ckfinder-bundle.git",
+                    "type": "git",
+                    "reference": "405de1b3b05242c93256039d5aa2a90b2fcc5921"
+                },
+                "require": {
+                    "jonlil/ckfinder": "dev-master"
+                },
+                "autoload": {
+                    "psr-0": { "Jonlil\\CKFinderBundle": "" }
+                },
+                "target-dir": "Jonlil/CKFinderBundle"
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "pixassociates/sortable-behavior-bundle",
+                "version": "dev-master",
+                "source": {
+                    "url": "ssh://git@gitlab.artsofte.ru:2243/bundles/sortable-behavior-bundle.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "psr-0": { "Pix\\SortableBehaviorBundle": "" }
+                },
+                "target-dir": "Pix/SortableBehaviorBundle"
+            }
+        }
+    ],
+    "scripts": {
+        "post-install-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Etfostra\\PageLayoutBundle\\Composer\\ScriptHandler::installGridStackJs",
+            "Tradeins\\CorpBundle\\Composer\\ScriptHandler::installVendorJs",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "post-update-cmd": [
+            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
+            "Etfostra\\PageLayoutBundle\\Composer\\ScriptHandler::installGridStackJs",
+            "Tradeins\\CorpBundle\\Composer\\ScriptHandler::installVendorJs",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
+            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ]
+    },
+    "config": {
+        "bin-dir": "bin",
+        "component-dir": "web/assets"
+    },
+    "extra": {
+        "symfony-app-dir": "app",
+        "symfony-web-dir": "web",
+        "symfony-assets-install": "symlink",
+        "incenteev-parameters": {
+            "file": "app/config/parameters.yml",
+            "dist-file": "vendor/tradeins/corp-bundle/Tradeins/CorpBundle/Resources/config/project/parameters.yml.dist",
+            "env-map": {
+                "database_host": "database_host",
+                "database_name": "database_name",
+                "database_user": "database_user",
+                "database_password": "database_password",
+                "project_title": "project_title",
+                "redis_channel": "redis_channel",
+                "redis_channel_dict": "redis_channel_dict",
+                "tradeins_corp.api.company": "tradeins_corp_api_company",
+                "tradeins_corp.api.auth.user": "tradeins_corp_api_auth_user",
+                "tradeins_corp.api.auth.password": "tradeins_corp_api_auth_password",
+                "is_production": "is_production",
+                "is_testing": "is_testing",
+                "tracking.api.host": "tracking_api_host",
+                "tracking.enabled": "tracking_enabled",
+                "correct_price.maid": "correct_price_maid",
+                "theme": "theme",
+                "cdn.host": "cdn_host",
+                "php_name": "php_name"
+            }
+        }
+    }
+}

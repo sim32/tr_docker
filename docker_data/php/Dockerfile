@@ -16,6 +16,8 @@ RUN pecl install redis-3.1.1 \
     && pecl install xdebug-2.5.0 \
     && docker-php-ext-enable redis xdebug
 
+EXPOSE 9000 9001
+
 #CMD ls /etc
 #RUN sed -i -e "s/;daemonize\s*=\s*yes/daemonize = no/g" /etc/php/7.0/fpm/pool.d/www.conf
 
